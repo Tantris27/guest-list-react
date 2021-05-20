@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import { DeleteField } from './DeleteButton';
+import { GuestField } from './PushButton';
 
-function App() {
+export function App() {
+  const baseUrl = 'https://guestlistapi.herokuapp.com/';
+  const getGuestList = async () => {
+    const response = await fetch(`${baseUrl}`);
+    const allGuests = await response.json();
+    console.log(allGuests);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={getGuestList}> Hello Guest List</button>
+
+      <GuestField />
+      <DeleteField />
     </div>
   );
 }
