@@ -12,14 +12,12 @@ export function GuestField() {
     <div>
       <input
         type="text"
-        // value="firstName"
         onChange={(e) => {
           setFirstText(e.currentTarget.value);
         }}
       />
       <input
         type="text"
-        // value="lastName"
         onChange={(e) => {
           setLastText(e.currentTarget.value);
         }}
