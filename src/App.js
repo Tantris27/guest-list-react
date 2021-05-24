@@ -53,6 +53,9 @@ export function App() {
                 }),
               });
               setListUpdate(!listUpdate);
+              if (filter === 'none') {
+                setFilter('all');
+              }
             }}
           >
             {' '}
@@ -60,6 +63,11 @@ export function App() {
           </button>
         </form>
       </div>
+      {filter === 'none' && (
+        <div>
+          <p>No Guests in the List yet.</p>
+        </div>
+      )}
       {filter === 'all' && (
         <div>
           <ul>
@@ -224,6 +232,22 @@ export function App() {
           }}
         >
           Attending
+        </button>
+        <button
+          onClick={async () => {
+            setGuestList(
+              guestList.map(async (guest) => {
+                await fetch(`${baseUrl}${guest.id}`, {
+                  method: 'DELETE',
+                });
+              }),
+            );
+
+            setListUpdate(!listUpdate);
+            setFilter('none');
+          }}
+        >
+          Delete All
         </button>
       </div>
     </div>
