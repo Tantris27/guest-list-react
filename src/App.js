@@ -63,11 +63,6 @@ export function App() {
           </button>
         </form>
       </div>
-      {filter === 'none' && (
-        <div>
-          <p>No Guests in the List yet.</p>
-        </div>
-      )}
       {filter === 'all' && (
         <div>
           <ul>
@@ -243,7 +238,7 @@ export function App() {
             });
 
             setListUpdate(!listUpdate);
-            setFilter('none');
+            setFilter('all');
           }}
         >
           Delete All
