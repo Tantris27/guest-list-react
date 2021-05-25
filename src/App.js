@@ -236,16 +236,14 @@ export function App() {
         </button>
         <button
           onClick={async () => {
-            setGuestList(
-              guestList.map(async (guest) => {
-                await fetch(`${baseUrl}${guest.id}`, {
-                  method: 'DELETE',
-                });
-              }),
-            );
-
+            guestList.map(async (guest) => {
+              await fetch(`${baseUrl}${guest.id}`, {
+                method: 'DELETE',
+              });
+              setGuestList([]);
+            });
             setListUpdate(!listUpdate);
-            setFilter('none');
+            setFilter('all');
           }}
         >
           Delete All
