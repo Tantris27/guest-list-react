@@ -1,8 +1,20 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import { FilterButtons } from './FilterButtons';
-import GuestInputField from './GuestInputField';
-import GuestList from './GuestList';
+import { FilterButtons } from './Components/FilterButtons';
+import GuestInputField from './Components/GuestInputField';
+import GuestList from './Components/GuestList';
 
+const loadingDiv = css`
+  display: flex;
+  margin: 20% 0 0 600px;
+  background-color: #f5f5f5;
+`;
+const bodyStyle = css`
+  background-color: #f5f5f5;
+  width: 100vw;
+  height: 100vh;
+`;
 export function App() {
   const baseUrl = 'https://guestlistapi.herokuapp.com/';
 
@@ -24,35 +36,41 @@ export function App() {
   }, [listUpdate]);
 
   if (fetch1) {
-    return <div>Loading ....</div>;
+    return (
+      <div>
+        <h1 css={loadingDiv}>Loading the Guest List....</h1>
+      </div>
+    );
   }
   return (
-    <div>
-      <GuestInputField
-        baseUrl={baseUrl}
-        listUpdate={listUpdate}
-        setListUpdate={setListUpdate}
-        onClick={() => setListUpdate(!listUpdate)}
-      />
+    <body css={bodyStyle}>
+      <div>
+        <GuestInputField
+          baseUrl={baseUrl}
+          listUpdate={listUpdate}
+          setListUpdate={setListUpdate}
+          onClick={() => setListUpdate(!listUpdate)}
+        />
 
-      <GuestList
-        baseUrl={baseUrl}
-        listUpdate={listUpdate}
-        setListUpdate={setListUpdate}
-        newGuestList={newGuestList}
-        filter={filter}
-      />
-      <FilterButtons
-        baseUrl={baseUrl}
-        listUpdate={listUpdate}
-        setListUpdate={setListUpdate}
-        newGuestList={newGuestList}
-        setFilter={setFilter}
-        setNewGuestList={setNewGuestList}
-        setGuestList={setGuestList}
-        guestList={guestList}
-      />
-    </div>
+        <GuestList
+          baseUrl={baseUrl}
+          listUpdate={listUpdate}
+          setListUpdate={setListUpdate}
+          newGuestList={newGuestList}
+          filter={filter}
+        />
+        <FilterButtons
+          baseUrl={baseUrl}
+          listUpdate={listUpdate}
+          setListUpdate={setListUpdate}
+          newGuestList={newGuestList}
+          setFilter={setFilter}
+          setNewGuestList={setNewGuestList}
+          setGuestList={setGuestList}
+          guestList={guestList}
+        />
+      </div>
+    </body>
   );
 }
 
